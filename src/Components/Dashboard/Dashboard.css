@@ -1,0 +1,30 @@
+ /* a.active{
+    color: #007BFF;
+    font-size: large;
+    border-right: 1px solid #007BFF;
+} */
+.dashboard a.active {
+    color: #007BFF;
+    font-size: large;
+    border-right: 2px solid #007BFF;
+    border-radius: 3px;
+    background-color: #eef3f8;
+    /* border-top: 1px solid #007BFF; */
+    /* border-bottom: 1px solid #007BFF; */
+    
+    transition: color 0.3s, font-size 0.3s, border-right 0.3s;
+}
+
+/* Additional hover effect for a smoother experience */
+.dashboard a:hover {
+    color: #0056b3; /* a slightly darker shade for hover effect */
+    background-color: #eef3f8;
+    /* border-right: 2px solid #007BFF; */
+    
+    
+}
+.dashboard a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
