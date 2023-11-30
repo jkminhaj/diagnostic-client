@@ -13,7 +13,8 @@ const Reservations = () => {
     useEffect(() => {
         axios.get('https://doctor-server-five.vercel.app/reservations')
             .then(res => {
-                setAllReservations(res.data);
+                const filtered = res.data.filter(reservation=> reservation.report_status==='pending');
+                setAllReservations(filtered);
             })
     }, [reFetching])
     
@@ -34,7 +35,9 @@ const Reservations = () => {
     const handleSubmit = id =>{
         axios.patch(`https://doctor-server-five.vercel.app/reservations/delivered/${id}`)
         .then(res=>{
-            console.log(res.data)
+            if(res.data){
+                window.location.reload()
+            }
         })
     }
 

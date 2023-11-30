@@ -10,7 +10,9 @@ const UpcomingAppointments = () => {
     useEffect(() => {
         fetch(`https://doctor-server-five.vercel.app/reservations?email=${user.email}`)
             .then(res => res.json())
-            .then(data => setAllReservations(data))
+            .then(data => {
+                const filtered = data.filter(reservation=> reservation.report_status==='pending')
+                setAllReservations(filtered)})
     }, [])
 
     const handleCancel = id =>{
