@@ -17,8 +17,9 @@ const AddABanner = () => {
         // optional add toast
         const newBanner = {name , title , image , description , coupon_code , coupon_rate  ,isActive}
         console.log(newBanner)
-        axios.post('http://localhost:3000/banners',newBanner)
+        axios.post('https://doctor-server-five.vercel.app/banners',newBanner)
         .then(res=>{
+            console.log(res.data)
             if(res.data.insertedId){
                 Swal.fire({
                     position: 'top-middle',

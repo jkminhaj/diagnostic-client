@@ -4,8 +4,10 @@ import useBanners from '../Hooks/useBanners';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { AuthContext } from '../Context/AuthProvider';
+import useStatus from '../Hooks/useStatus';
 
 const DetailTest = () => {
+    const [isBlocked] = useStatus()
     const { user } = useContext(AuthContext);
     const { imageUrl: image, testName, _id, details, price, date, slots } = useLoaderData()
     const [bookingPrice, setBookingPrice] = useState(price);
@@ -36,10 +38,10 @@ const DetailTest = () => {
             })
         }
 
-        axios.post('http://localhost:3000/reservations', newReservation)
+        axios.post('https://doctor-server-five.vercel.app/reservations', newReservation)
             .then(res => {
                 if(res.data.insertedId){
-                    axios.patch(`http://localhost:3000/tests/slots/${_id}`)
+                    axios.patch(`https://doctor-server-five.vercel.app/tests/slots/${_id}`)
                         .then(res => {
                             console.log(res.data.status)
                             if (res.data.status === 'Done') {
@@ -68,6 +70,19 @@ const DetailTest = () => {
             return
         }
     }
+
+    const handleCheck = id =>{
+        if(isBlocked){
+            return Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'User is blocked by admin',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        document.getElementById(`${id}`).showModal()
+    }
     return (
         <div className='mt-7 w-11/12 mx-auto'>
             <div className='flex gap-12'>
@@ -84,7 +99,7 @@ const DetailTest = () => {
                         <p className='mt-3 text-xl'>Available Slots : {slots}</p>
 
                         {/* Open the modal using document.getElementById('ID').showModal() method */}
-                        <button className="btn bg-blue-500 text-white text-xl mt-10 hover:bg-blue-900" onClick={() => document.getElementById(`${_id}`).showModal()}>Book Now</button>
+                        <button  className="btn bg-blue-500 text-white text-xl mt-10 hover:bg-blue-900" onClick={() => handleCheck(_id)}>Book Now</button>
                         <dialog id={_id} className="modal">
                             <div className="modal-box">
                                 <h3 className="font-bold text-lg">{testName}</h3>

@@ -1,6 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useTests from "../../../Hooks/useTests";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { Form } from "react-router-dom";
 
 const AllTests = () => {
     const [tests, refetch, isLoading] = useTests();
@@ -16,12 +19,60 @@ const AllTests = () => {
             </>
         )
     }
-    const handleDelete = id =>{
+
+
+    const handleDelete = id => {
+        axios.delete(`https://doctor-server-five.vercel.app/tests/${id}`)
+            .then(res => {
+                if (res.data.deletedCount) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully Deleted',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    refetch()
+                }
+            })
+    }
+
+    // send updated value to the databse
+    const handleSubmit = (id , e) => {
+        e.preventDefault()
+        const form = e.target;
+        const NewTestName = form.NewTestName.value;
+        const NewImageUrl = form.NewImageUrl.value;
+        const NewDetails = form.NewDetails.value;
+        const NewPrice = form.NewPrice.value;
+        const NewDate = form.NewDate.value;
+        const NewSlots = form.NewSlots.value;
+
+        const updatedTestsInfo = { NewDate , NewDetails , NewTestName , NewSlots , NewPrice , NewImageUrl };
+
+        axios.patch(`https://doctor-server-five.vercel.app/tests/${id}`, updatedTestsInfo)
+            .then(res => {
+                if (res.data.acknowledged) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully updated proflie',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    refetch()
+                }
+            })
 
     }
+
+
+
+
+
     return (
         <div className="flex-1">
-            
+
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -55,9 +106,9 @@ const AllTests = () => {
                                 <td className="text-red-500">
                                     $ {u.price}
                                 </td>
-                               <td>{u.date}</td>
-                               <td>{u.slots}</td>
-                               <td><button onClick={()=>handleDelete()}><FontAwesomeIcon className="text-red-700" icon={faTrash}></FontAwesomeIcon></button></td>
+                                <td>{u.date}</td>
+                                <td>{u.slots}</td>
+                                <td><button onClick={() => handleDelete(u._id)}><FontAwesomeIcon className="text-red-700" icon={faTrash}></FontAwesomeIcon></button></td>
                                 <td>
                                     <p onClick={() => document.getElementById(`${u._id}`).showModal()} className="text-[#007BFF] text-center py-1  hover:bg-blue-400 hover:text-white rounded-full cursor-pointer">Update</p>
                                 </td>
@@ -68,19 +119,34 @@ const AllTests = () => {
                                             {/* if there is a button in form, it will close the modal */}
                                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                         </form>
-                                        <div className="flex gap-5">
-                                            <div className=" w-40 h-40 ">
-                                                <img className="rounded-xl" src={u.avatar} alt="Avatar Tailwind CSS Component" />
-                                                <p className="text-center font-semibold mt-1">{u.name}</p>
+                                        <div className="">
+                                            <div className= " flex justify-center mb-5">
+                                                <div className=" w-60">
+                                                    <img className="rounded" src={u.imageUrl} alt="Avatar Tailwind CSS Component" />
+                                                </div>
                                             </div>
-                                            <div className="flex flex-col justify-center gap-2 border-l-2 pl-5 ">
-                                                <p>Email: {u.email}</p>
-                                                <p>ID: {u._id}</p>
-                                                <p>Blood Group: {u.blood_group}</p>
-                                                <p>District: {u.district}</p>
-                                                <p>Upazila: {u.upazila}</p>
+                                            <Form onSubmit={(e)=>handleSubmit(u._id, e)} className="flex flex-col justify-center   pl-5 ">
+                                                <p>Test Name</p>
+                                                <input defaultValue={u.testName} required type="text" className="w-full outline-none focus:border-blue-500 text-base border px-2 rounded" placeholder="test name" name="NewTestName" /><input className=""></input>
 
-                                            </div>
+                                                <p>Image Link</p>
+                                                <input defaultValue={u.imageUrl} required type="text" className="w-full outline-none focus:border-blue-500 text-base border px-2 rounded" placeholder="Image link" name="NewImageUrl" /><input className=""></input>
+
+                                                <p>Details</p>
+                                                <input defaultValue={u.details} required type="text" className="w-full outline-none focus:border-blue-500 text-base border px-2 rounded" placeholder="Details" name="NewDetails" /><input className=""></input>
+
+                                                <p>Price</p>
+                                                <input defaultValue={u.price} required type="number" className="w-full outline-none focus:border-blue-500 text-base border px-2 rounded" placeholder="price" name="NewPrice" /><input className=""></input>
+
+                                                <p>Date</p>
+                                                <input defaultValue={u.date} required type="text" className="w-full outline-none focus:border-blue-500 text-base border px-2 rounded" placeholder="dd mm yyyy" name="NewDate" /><input className=""></input>
+
+                                                <p>Slots</p>
+                                                <input defaultValue={u.slots} required type="number" className="w-full outline-none focus:border-blue-500 text-base border px-2 rounded" placeholder="Slots" name="NewSlots" /><input className=""></input>
+
+
+                                                <button className="btn bg-blue-400 text-white">Update</button>
+                                            </Form>
                                         </div>
                                     </div>
                                 </dialog>

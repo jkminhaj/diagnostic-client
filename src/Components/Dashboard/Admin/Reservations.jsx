@@ -11,7 +11,7 @@ const Reservations = () => {
     const [allReservations, setAllReservations] = useState([]);
     // loadall reservations
     useEffect(() => {
-        axios.get('http://localhost:3000/reservations')
+        axios.get('https://doctor-server-five.vercel.app/reservations')
             .then(res => {
                 setAllReservations(res.data);
             })
@@ -20,7 +20,7 @@ const Reservations = () => {
     // search 
     const [searchEmail, setSearchEmail] = useState('');
     useEffect(() => {
-        fetch(`http://localhost:3000/reservations?email=${searchEmail}`)
+        fetch(`https://doctor-server-five.vercel.app/reservations?email=${searchEmail}`)
             .then(res => res.json())
             .then(data => setAllReservations(data))
     }, [searchEmail])
@@ -32,14 +32,14 @@ const Reservations = () => {
     }
 
     const handleSubmit = id =>{
-        axios.patch(`http://localhost:3000/reservations/delivered/${id}`)
+        axios.patch(`https://doctor-server-five.vercel.app/reservations/delivered/${id}`)
         .then(res=>{
             console.log(res.data)
         })
     }
 
     const handleCancel = id =>{
-        axios.delete(`http://localhost:3000/reservations/cancel/${id}`)
+        axios.delete(`https://doctor-server-five.vercel.app/reservations/cancel/${id}`)
         .then(res=>{
             if(res.data.deletedCount){
                 window.location.reload()

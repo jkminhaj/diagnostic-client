@@ -5,7 +5,7 @@ import { useState } from "react";
 const Recommendation = () => {
     const [recc, setRecc] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:3000/recommendations')
+        axios.get('https://doctor-server-five.vercel.app/recommendations')
             .then(res => setRecc(res.data));
     }, [])
     return (

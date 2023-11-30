@@ -11,7 +11,7 @@ const MyProfile = () => {
     const [userData, setUserData] = useState(null)
     const { user } = useContext(AuthContext);
     useEffect(() => {
-        axios.get(`http://localhost:3000/users?email=${user.email}`)
+        axios.get(`https://doctor-server-five.vercel.app/users?email=${user.email}`)
             .then(res => {
                 setUserData(res.data[0])
             })
@@ -31,7 +31,7 @@ const MyProfile = () => {
         const NewDistrict = form.district.value;
         const updatedProfileInfo = {NewAvatar,NewBlood,NewDistrict,NewUpazila,NewName};
         
-        axios.patch(`http://localhost:3000/users/${user?.email}` ,updatedProfileInfo)
+        axios.patch(`https://doctor-server-five.vercel.app/users/${user?.email}` ,updatedProfileInfo)
         .then(res=>{
             if(res.data.acknowledged){
                 updateProfile(auth.currentUser,{

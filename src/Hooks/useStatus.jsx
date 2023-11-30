@@ -13,7 +13,7 @@ const useStatus = () => {
         enabled: !loading,
         queryFn: async () => {
             console.log('asking or checking if user is blockd or not', user)
-            const res = await axios.get(`http://localhost:3000/users/block/${user.email}`);
+            const res = await axios.get(`https://doctor-server-five.vercel.app/users/block/${user.email}`);
             // console.log(res.data);
             return res.data?.blocked;
         }

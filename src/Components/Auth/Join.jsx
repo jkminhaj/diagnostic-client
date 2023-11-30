@@ -94,7 +94,7 @@ const Join = () => {
                 // Connect to firebase
                 console.log('7')
                 // axios
-                axios.post('http://localhost:3000/users', userData)
+                axios.post('https://doctor-server-five.vercel.app/users', userData)
                     .then(res => {
                         console.log('6')
                         console.log(res.data)

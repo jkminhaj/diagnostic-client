@@ -17,9 +17,9 @@ const Dashboard = () => {
     const [isBlocked] = useStatus();
     console.log(isBlocked)
     return (
-        <div className="flex">
+        <div className="flex ">
             {/* navigation seciotn */}
-            <section className="dashboard w-2/12 nav bg-slate-50 h-screen pl-3 pt-5 md:pl-8 space-y-4">
+            <section className="dashboard w-2/12 nav bg-slate-50  h-screen pl-3 pt-5 md:pl-8 space-y-4">
 
                 <NavLink to='/' className='flex items-center gap-4 text-gray-500'>
                     <FontAwesomeIcon className="text-xs" icon={faHome}></FontAwesomeIcon>
@@ -27,7 +27,7 @@ const Dashboard = () => {
                 </NavLink>
                 {/* dashboard user */}
                 {
-                    !isAdmin && user &&
+                    !isAdmin && user && !isBlocked &&
                     <>
                         <NavLink to='/dashboard/myprofile' className='flex items-center gap-4 text-gray-500'>
                             <FontAwesomeIcon className="text-xs" icon={faUser}></FontAwesomeIcon>

@@ -1,57 +1,74 @@
-import React from 'react';
+import { Container, TextField, Button, Typography, Paper } from '@mui/material';
 
 const ContactUs = () => {
   return (
-    <div className="bg-gray-50 py-16">
-      <div className="container mx-auto flex justify-center items-center">
-        <div className="bg-white p-10 rounded-md shadow-md w-full md:w-2/3 lg:w-1/2">
-          <h1 className="text-4xl font-semibold mb-6 text-center">Contact Us</h1>
+    <Paper className=" py-16">
+      <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Paper className="bg-white p-10 rounded-md w-full md:w-2/3 border lg:w-1/2">
+          <Typography variant="h4" component="h1" align="center" gutterBottom>
+            Contact Us
+          </Typography>
           <form>
             <div className="mb-4">
-              <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Your Name</label>
-              <input
+              <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+                Your Name
+              </label>
+              <TextField
                 type="text"
                 id="name"
                 name="name"
-                className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                fullWidth
+                variant="outlined"
+                margin="normal"
                 placeholder="John Doe"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Your Email</label>
-              <input
+              <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+                Your Email
+              </label>
+              <TextField
                 type="email"
                 id="email"
                 name="email"
-                className="w-full border border-gray-300 p-2 rounded-md focus:outline-none focus:border-blue-500"
+                fullWidth
+                variant="outlined"
+                margin="normal"
                 placeholder="john@example.com"
                 required
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="message" className="block text-gray-700 font-bold mb-2">Message</label>
-              <textarea
+              <label htmlFor="message" className="block text-gray-700 font-bold mb-2">
+                Message
+              </label>
+              <TextField
                 id="message"
                 name="message"
-                rows="4"
-                className="w-full border border-gray-300 p-2 rounded-md resize-none focus:outline-none focus:border-blue-500"
+                multiline
+                rows={4}
+                fullWidth
+                variant="outlined"
+                margin="normal"
                 placeholder="Type your message here..."
                 required
-              ></textarea>
+              />
             </div>
             <div className="text-center">
-              <button
+              <Button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+                variant="contained"
+                color="primary"
+                sx={{ '&:hover': { backgroundColor: '#0069d9' } }}
               >
                 Send Message
-              </button>
+              </Button>
             </div>
           </form>
-        </div>
-      </div>
-    </div>
+        </Paper>
+      </Container>
+    </Paper>
   );
 };
 

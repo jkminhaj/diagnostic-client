@@ -9,12 +9,12 @@ const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:3000/users');
+            const res = await axios.get('https://doctor-server-five.vercel.app/users');
             return res.data;
         }
     })
     const handleMakeAdmin = u =>{
-        axios.patch(`http://localhost:3000/users/admin/${u._id}`)
+        axios.patch(`https://doctor-server-five.vercel.app/users/admin/${u._id}`)
         .then(res =>{
             console.log(res.data)
             if(res.data.modifiedCount > 0){
@@ -30,7 +30,7 @@ const AllUsers = () => {
         })
     }
     const handleMakeBlock = u =>{
-        axios.patch(`http://localhost:3000/users/block/${u._id}`)
+        axios.patch(`https://doctor-server-five.vercel.app/users/block/${u._id}`)
         .then(res =>{
             console.log(res.data)
             if(res.data.modifiedCount > 0){

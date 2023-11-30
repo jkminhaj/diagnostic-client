@@ -42,7 +42,7 @@ const FeaturedTest = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/reservations?email=${user?.email}`)
+        fetch(`https://doctor-server-five.vercel.app/reservations?email=${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 const ids = data.map(test => test.testId);

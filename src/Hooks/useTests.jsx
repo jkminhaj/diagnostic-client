@@ -5,7 +5,7 @@ const useTests = () => {
     const {data:tests , refetch ,isLoading } = useQuery({
         queryKey : ['tests'],
         queryFn: async () =>{
-            const res = await axios.get('http://localhost:3000/tests');
+            const res = await axios.get('https://doctor-server-five.vercel.app/tests');
             return res.data ;
         }
     })

@@ -8,13 +8,13 @@ const UpcomingAppointments = () => {
 
     const [allReservations, setAllReservations] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:3000/reservations?email=${user.email}`)
+        fetch(`https://doctor-server-five.vercel.app/reservations?email=${user.email}`)
             .then(res => res.json())
             .then(data => setAllReservations(data))
     }, [])
 
     const handleCancel = id =>{
-        axios.delete(`http://localhost:3000/reservations/cancel/${id}`)
+        axios.delete(`https://doctor-server-five.vercel.app/reservations/cancel/${id}`)
         .then(res=>{
             if(res.data.deletedCount){
                 window.location.reload()

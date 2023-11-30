@@ -13,7 +13,7 @@ const AllBanners = () => {
         return <p>Loading...</p>;
     }
     const handleDelete = id =>{
-        axios.delete(`http://localhost:3000/banners/${id}`)
+        axios.delete(`https://doctor-server-five.vercel.app/banners/${id}`)
         .then(res=>{
             if(res.data){
                 Swal.fire({
@@ -29,7 +29,7 @@ const AllBanners = () => {
         })
     };
     const handleTurnOnBanner = id =>{
-        axios.patch(`http://localhost:3000/banners/select/${id}`)
+        axios.patch(`https://doctor-server-five.vercel.app/banners/select/${id}`)
         .then(res=>{
             Swal.fire({
                 position: 'top-middle',

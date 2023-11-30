@@ -5,6 +5,8 @@ import { AuthContext } from "../../../Context/AuthProvider";
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddATest = () => {
     const [testDate, setTestDate] = useState(null);
@@ -20,6 +22,21 @@ const AddATest = () => {
         const newTest = {testName,imageUrl,details,price,slots,date};
         console.log(newTest)
         // add a tost for adding
+        axios.post('https://doctor-server-five.vercel.app/tests',newTest)
+        .then(res=>{
+            console.log(res.data)
+            if(res.data.insertedId){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Successfully added test',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                setTestDate(null)
+                form.reset()
+            }
+        })
     }
     return (
         <div className="flex-1">
@@ -49,36 +66,3 @@ const AddATest = () => {
 };
 
 export default AddATest;
-
-{/* <div>
-<div className='mb-5 flex justify-center'>
-                        <div className='flex items-center gap-4'>
-                            <p className='text-2xl text-center text-blue-400 font-semibold'>
-                                Add A Test
-                            </p>
-                            <FontAwesomeIcon color="#0080FF" className='text-2xl' icon={faAdd} />
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 md:my-9 gap-2 mb-3">
-                        <input required type="text" className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded" name="name" defaultValue={user?.displayName} placeholder="Name" />
-                        <input required type="text" className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded" name="title" placeholder="Job title" />
-                        <input required type="text" className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded" name="banner" placeholder="Job banner url" />
-                        <div className='relative'>
-                            <input required type="number" defaultValue='0' className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded" name="applicants" />
-                            <p className='absolute text-xs right-9 text-gray-300 top-4'>Applicants</p>
-                        </div>
-                        <input required type="text" className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded" name="description" placeholder="Description" />
-                        <input required type="text" className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded" name="salary" placeholder="Salary Range  ex: 99-99" />
-                        <select required name="category" className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded">
-                            <option value='Remote'>Category</option>
-                            <option value="Remote">Remote Jobs</option>
-                            <option value="Hybrid">Hybrid Jobs</option>
-                            <option value="Part-Time">Part Time Jobs</option>
-                            <option value="On-Site">On Site Jobs</option>
-                        </select>
-                        <ReactDatePicker required placeholderText='Deadline' className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded" selected={deadline} onChange={(date) => setDeadline(date)} />
-                        <ReactDatePicker required placeholderText='Posting Date' className="w-full outline-none focus:border-blue-500 text-base border p-3 rounded" selected={postingDate} onChange={(date) => setPostingDate(date)} />
-                        
-                    </div>
-                    <p className="text-xs mb-1 mt-5 text-center">By posting this job , you agree to Remoto’s <span className="font-semibold text-blue-400">Terms of service</span>, <span className="font-semibold text-blue-400">Privacy Policy</span>, and <span className="font-semibold text-blue-400">Cookie Policy</span>.</p>
-</div> */}
