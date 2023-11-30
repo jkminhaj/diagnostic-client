@@ -1,0 +1,24 @@
+.nav.active {
+    color: rgb(1, 171, 213);
+    font-weight: bold; 
+    border-bottom: 2px solid rgb(1, 171, 213); 
+    transition: color 0.3s, border-bottom 0.3s; 
+}
+
+.nav:hover {
+    color: rgb(0, 95, 139);
+    
+}
+
+a {
+     
+    text-decoration: none; 
+    transition: color 0.3s; 
+}
+
+a:hover {
+    color: darkblue; 
+}
+
+
+

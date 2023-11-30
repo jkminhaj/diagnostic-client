@@ -1,6 +1,6 @@
-const UpazilaOption = () => {
+const UpazilaOption = ({defaultValue}) => {
     return (
-        <select required defaultValue="" type="text" className="w-full  text-gray-400 outline-none focus:border-blue-500 text-base border p-3 rounded" name="upazila">
+        <select required defaultValue={defaultValue||''} type="text" className="w-full  text-gray-400 outline-none focus:border-blue-500 text-base border p-3 rounded" name="upazila">
             <option value="" disabled >Select an Upazila</option>
             <option value="Debidwar">Debidwar</option>
             <option value="Barura">Barura</option>

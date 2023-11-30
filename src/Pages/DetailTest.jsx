@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLoaderData, useParams } from 'react-router-dom';
 import useBanners from '../Hooks/useBanners';
 import Swal from 'sweetalert2';
+import axios from 'axios';
+import { AuthContext } from '../Context/AuthProvider';
 
 const DetailTest = () => {
+    const { user } = useContext(AuthContext);
     const { imageUrl: image, testName, _id, details, price, date, slots } = useLoaderData()
     const [bookingPrice, setBookingPrice] = useState(price);
     // current banner info
@@ -14,11 +17,44 @@ const DetailTest = () => {
     const banner = banners.find(banner => banner.isActive === true);
     const { coupon_rate, coupon_code } = banner;
 
+    const report_status = 'pending';
+    const email = user.email;
+    const testId = _id;
+    //  report_status , bookingPrice , email , testName , image , date , testId
+
+    const newReservation = { report_status, bookingPrice, email, testId, testName, image, date };
+
     const handleBook = () => {
         console.log('booked')
-        if(slots<1){
-            return
+        if (slots < 1) {
+            return Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'sorry no slots available',
+                showConfirmButton: false,
+                timer: 1500
+            })
         }
+
+        axios.post('http://localhost:3000/reservations', newReservation)
+            .then(res => {
+                if(res.data.insertedId){
+                    axios.patch(`http://localhost:3000/tests/slots/${_id}`)
+                        .then(res => {
+                            console.log(res.data.status)
+                            if (res.data.status === 'Done') {
+                                window.location.reload()
+                                setTimeout(() => {
+                                    console.log('hi')
+                                }, 4000);
+                            }
+                        })
+
+                }
+                
+            })
+
+
     }
     const handleCoupon = e => {
         e.preventDefault();

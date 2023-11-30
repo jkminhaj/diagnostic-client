@@ -1,6 +1,6 @@
-const DistrictOption = () => {
+const DistrictOption = ({defaultValue}) => {
     return (
-        <select required type="text" defaultValue="" className="w-full text-gray-400  outline-none focus:border-blue-500 text-base border p-3 rounded" name="district">
+        <select required type="text" defaultValue={defaultValue||''} className="w-full text-gray-400  outline-none focus:border-blue-500 text-base border p-3 rounded" name="district">
             <option value="" disabled>Select an District</option>
             <option value="Barisal">Barisal</option>
             <option value="Bhola">Bhola</option>

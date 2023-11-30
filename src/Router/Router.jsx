@@ -15,6 +15,12 @@ import TestResults from "../Components/Dashboard/User/TestResults";
 import UpcomingAppointments from "../Components/Dashboard/User/UpcomingAppointments";
 import AllTestsPublic from "../Pages/AllTestsPublic";
 import DetailTest from "../Pages/DetailTest";
+import PrivateRoute from "./Private/PrivateRoute";
+import AdminRoute from "./Admin/AdminRoute";
+import CheckActive from "./Private/CheckActive";
+import Blogs from "../Pages/Blogs";
+import OurTeam from "../Pages/OurTeam";
+import ContactUs from "../Pages/ContactUs";
 
 export const router = createBrowserRouter([
     {
@@ -26,13 +32,25 @@ export const router = createBrowserRouter([
           element:<Home></Home>
         },
         {
+          path:'/blogs',
+          element:<Blogs></Blogs>
+        },
+        {
+          path:'/ourteam',
+          element:<OurTeam></OurTeam>
+        },
+        {
+          path:'/contactus',
+          element:<ContactUs></ContactUs>
+        },
+        {
           path:'/alltestspublic',
           element:<AllTestsPublic></AllTestsPublic>
         },
         // detailed test will be private
         {
           path:`/detailtest/:id`,
-          element:<DetailTest></DetailTest>,
+          element:<PrivateRoute><DetailTest></DetailTest></PrivateRoute>,
           loader:({params})=>fetch(`http://localhost:3000/tests/${params.id}`)
         }
       ]
@@ -50,7 +68,7 @@ export const router = createBrowserRouter([
     // Dashboard
     {
       path:'/dashboard',
-      element:<Dashboard></Dashboard>,
+      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children:[
         {
           path:'/dashboard',
@@ -59,40 +77,40 @@ export const router = createBrowserRouter([
         // user dashboard routes
         {
           path:'myprofile',
-          element:<MyProfile></MyProfile>
+          element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
         },
         {
           path:'testresults',
-          element:<TestResults></TestResults>
+          element:<PrivateRoute><TestResults></TestResults></PrivateRoute>
         },
         {
           path:'upcomingappointments',
-          element:<UpcomingAppointments></UpcomingAppointments>
+          element:<PrivateRoute><UpcomingAppointments></UpcomingAppointments></PrivateRoute>
         },
         // // admin dashboard routes
         {
           path:'addabanner',
-          element:<AddABanner></AddABanner>
+          element:<AdminRoute><AddABanner></AddABanner></AdminRoute>
         },
         {
           path:'addatest',
-          element:<AddATest></AddATest>
+          element:<AdminRoute><AddATest></AddATest></AdminRoute>
         },
         {
           path:'allbanners',
-          element:<AllBanners></AllBanners>
+          element:<AdminRoute><AllBanners></AllBanners></AdminRoute>
         },
         {
           path:'alltests',
-          element:<AllTests></AllTests>
+          element:<AdminRoute><AllTests></AllTests></AdminRoute>
         },
         {
           path:'allusers',
-          element:<AllUsers></AllUsers>
+          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
         },
         {
           path:'reservations',
-          element:<Reservations></Reservations>
+          element:<AdminRoute><Reservations></Reservations></AdminRoute>
         }
       ]
     }

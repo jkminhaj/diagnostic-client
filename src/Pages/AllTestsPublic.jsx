@@ -22,7 +22,7 @@ const AllTestsPublic = () => {
             <div className='grid grid-cols-4 gap-5 '>
                 {
                     tests.map(test => <div className="card card-compact bg-base-100 border">
-                        <figure><img className='h-52' src={test.imageUrl} alt="Shoes" /></figure>
+                        <figure><img className='h-52 w-full' src={test.imageUrl} alt="Shoes" /></figure>
                         <div className="card-body">
                             <h2 className="card-title">{test.testName}</h2>
                             <p>{test.details}</p>

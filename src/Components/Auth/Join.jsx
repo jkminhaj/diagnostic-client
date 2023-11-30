@@ -153,7 +153,7 @@ const Join = () => {
 
             <div className="md:border rounded md:shadow pt-8 md:pt-8 md:px-8 pb-8 px-5">
                 <h1 className="text-3xl text-center mb-2 font-medium">Sign Up</h1>
-                <p className="text-sm mb-5 text-center text-blue-500">Join the Community of Professionals</p>
+                <p className="text-sm mb-5 text-center text-blue-500">Get best treatment here</p>
                 <form onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 md:my-9 gap-2 mb-3">
                         {/* name and email */}
@@ -184,7 +184,7 @@ const Join = () => {
                             <p onClick={() => setVisibility(!visibility)} className="absolute cursor-pointer font-semibold hover:text-blue-300 text-blue-500 right-5  bottom-3">{visibility ? 'hide' : 'show'}</p>
                         </div>
                     </div>
-                    <p className="text-xs mb-1 mt-5 text-center">By clicking agree and join , you agree to Remoto’s <span className="font-semibold text-blue-400">User  Agreement</span>, <span className="font-semibold text-blue-400">Privacy Policy</span>, and <span className="font-semibold text-blue-400">Cookie Policy</span>.</p>
+                    <p className="text-xs mb-1 mt-5 text-center">By clicking agree and join , you agree to Diagonist <span className="font-semibold text-blue-400">User  Agreement</span>, <span className="font-semibold text-blue-400">Privacy Policy</span>, and <span className="font-semibold text-blue-400">Cookie Policy</span>.</p>
                     <button className="mt-5 w-full mb-2 border rounded-full py-3 bg-blue-400 text-white font-semibold hover:bg-blue-600">{loading ? <span className="loading loading-ball loading-xs"></span> : 'Agree & Join'}</button>
                 </form>
                 <div className="flex items-center py-1 justify-between mb-2">
@@ -194,7 +194,7 @@ const Join = () => {
                 </div>
 
                 <button className="w-full font-medium border py-3 rounded-full flex hover:bg-slate-50 justify-center items-center gap-3"> <FontAwesomeIcon color="#0080FF" icon={faGoogle} /> <p>Continue with Google</p></button>
-                <p className="text-center mt-6">Already on Remoto? <Link to='/login'><span className="text-blue-500 cursor-pointer font-semibold">Sign in</span></Link></p>
+                <p className="text-center mt-6">Already on Diagonist ? <Link to='/login'><span className="text-blue-500 cursor-pointer font-semibold">Sign in</span></Link></p>
             </div>
             <Toaster></Toaster>
         </div>

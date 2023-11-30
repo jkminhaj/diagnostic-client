@@ -66,7 +66,6 @@ const AllUsers = () => {
                     <tbody>
                         {
                             users.map(u => <tr key={u._id}>
-
                                 <td>
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">
