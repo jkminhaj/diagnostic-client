@@ -6,6 +6,8 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({children}) => {
     const [loading , setLoading] =useState(true);
     const [user , setUser] = useState(null);
+    // const [loading , setLoading] =useState(true);
+    // const [user , setUser] = useState(null);
 
     // sign in user
     const loginUser = (email , password) =>{
