@@ -38,7 +38,6 @@
 
 ### Recommendation Management:
 - **View Recommendations:** Created an API endpoint to fetch and display health recommendations.
-
 ### General:
 - **Pagination:** Implemented pagination for efficiently handling large datasets.
 - **Database Connectivity:** Established a connection to MongoDB using the Mongoose library.
